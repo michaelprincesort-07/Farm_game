@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://du00g26fwdjpr"]
+
+[ext_resource type="Script" uid="uid://bpk5wjkrm4e5d" path="res://Scripts/bed.gd" id="1_c32mu"]
+[ext_resource type="Texture2D" uid="uid://iqgjb1s8g3jj" path="res://assets/Objects/Basic_Furniture.png" id="1_xqjo8"]
+
+[node name="bed" type="RigidBody2D"]
+script = ExtResource("1_c32mu")
+
+[node name="bed_sprite" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(1.125, 1.125)
+texture = ExtResource("1_xqjo8")
+region_enabled = true
+region_rect = Rect2(0.9323621, 34.167496, 14.119133, 14.197224)
+
+[node name="bed_top" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+scale = Vector2(1.125, 1.125)
+texture = ExtResource("1_xqjo8")
+region_enabled = true
+region_rect = Rect2(0.9328952, 24.422, 14.140747, 9.848999)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -5)
+scale = Vector2(1.1, 1.1)
+polygon = PackedVector2Array(-7, -9, -5, -11, 5, -11, 7, -8, 7, 10, 6, 11, -6, 11, -7, 10, -7, 3, 5, 3, 5, -7, -7, -7)

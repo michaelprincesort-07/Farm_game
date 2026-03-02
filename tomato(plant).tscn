@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://dhl7hxcnjtnr0"]
+
+[ext_resource type="Texture2D" uid="uid://brms3xuj4w2jo" path="res://assets/Objects/Basic_Plants.png" id="1_5fm50"]
+[ext_resource type="Script" uid="uid://dfsm2mdi53qqj" path="res://Scripts/tomato(plant).gd" id="1_h6jmu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6jmu"]
+atlas = ExtResource("1_5fm50")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfgjy"]
+atlas = ExtResource("1_5fm50")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ds8yj"]
+atlas = ExtResource("1_5fm50")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rb2wv"]
+atlas = ExtResource("1_5fm50")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bqg1j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6jmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfgjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ds8yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rb2wv")
+}],
+"loop": false,
+"name": &"basic",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5fm50"]
+radius = 4.0
+
+[node name="tomato(plant)" type="Area2D"]
+script = ExtResource("1_h6jmu")
+
+[node name="tomato_animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bqg1j")
+animation = &"basic"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_5fm50")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

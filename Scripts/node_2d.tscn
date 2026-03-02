@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdd64uqtk4j5k"]
+
+[ext_resource type="Script" uid="uid://n3lvv11860rb" path="res://Scripts/inventory_handler.gd" id="1_nyviw"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Inventory_test" type="Sprite2D" parent="."]
+script = ExtResource("1_nyviw")

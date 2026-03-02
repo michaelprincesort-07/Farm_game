@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://7tubykoww0n1"]
+
+[ext_resource type="Script" uid="uid://buv3v1jdxkpps" path="res://Scripts/chicken.gd" id="1_isa2u"]
+[ext_resource type="Texture2D" uid="uid://ddabvreq3tjiu" path="res://assets/Characters/Free Chicken Sprites.png" id="2_tl7hd"]
+[ext_resource type="Script" uid="uid://fyg5j7lqg04j" path="res://Scripts/chicken_sprites.gd" id="3_tl7hd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtlia"]
+atlas = ExtResource("2_tl7hd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs43v"]
+atlas = ExtResource("2_tl7hd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnst4"]
+atlas = ExtResource("2_tl7hd")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhwt5"]
+atlas = ExtResource("2_tl7hd")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sa2qs"]
+atlas = ExtResource("2_tl7hd")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdtnw"]
+atlas = ExtResource("2_tl7hd")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y2hg1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtlia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs43v")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnst4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhwt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sa2qs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdtnw")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="chicken" type="RigidBody2D"]
+script = ExtResource("1_isa2u")
+speed = 7
+
+[node name="chicken_sprites" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y2hg1")
+animation = &"idle"
+script = ExtResource("3_tl7hd")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(3, -3, 4, -2, 4, 3, 3, 4, 2, 5, 1, 6, -4, 6, -5, 5, -6, 4, -7, 3, -7, 1, -6, 0, -5, -1, -5, -2, -4, -3, -3, -4, -2, -5, 1, -5, 2, -4)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-6, -2, -5, -3, -4, -4, -2, -6, 1, -6, 5, -2, 5, 3, 1, 7, -4, 7, -8, 3, -8, 1, -7, 0, -6, -1)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

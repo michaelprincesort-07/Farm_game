@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://3fk0wl54jm6y"]
+
+[ext_resource type="Script" uid="uid://b831j4v70rtk7" path="res://Scripts/chest.gd" id="1_8uwsg"]
+[ext_resource type="Texture2D" uid="uid://mue5dh8yarr6" path="res://assets/Objects/Chest.png" id="1_twpm2"]
+[ext_resource type="Script" uid="uid://bam51mv2dtqxm" path="res://Scripts/collision_shape_2d.gd" id="3_bp1or"]
+[ext_resource type="Script" uid="uid://cs6a8lv5vipe8" path="res://Scripts/animated_sprite_chest.gd" id="3_trlyu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bp1or"]
+atlas = ExtResource("1_twpm2")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trlyu"]
+atlas = ExtResource("1_twpm2")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7mpe"]
+atlas = ExtResource("1_twpm2")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bv3sb"]
+atlas = ExtResource("1_twpm2")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_day8l"]
+atlas = ExtResource("1_twpm2")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t3ekh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bp1or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trlyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7mpe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bv3sb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_day8l")
+}],
+"loop": false,
+"name": &"open",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8uwsg"]
+size = Vector2(16, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trlyu"]
+size = Vector2(12, 6)
+
+[node name="chest" type="RigidBody2D"]
+script = ExtResource("1_8uwsg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_t3ekh")
+animation = &"open"
+script = ExtResource("3_trlyu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_8uwsg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 11)
+shape = SubResource("RectangleShape2D_trlyu")
+script = ExtResource("3_bp1or")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="button_pressed" from="." to="AnimatedSprite2D" method="_on_chest_button_pressed"]
+[connection signal="chest_opened" from="." to="AnimatedSprite2D" method="_on_chest_chest_opened"]
+[connection signal="play_chest_animation" from="." to="AnimatedSprite2D" method="_on_chest_play_chest_animation"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="AnimatedSprite2D" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_exited" from="Area2D" to="AnimatedSprite2D" method="_on_area_2d_body_exited"]

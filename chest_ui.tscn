@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://bso2t6u4lkopj"]
+
+[ext_resource type="Texture2D" uid="uid://5etqyw6baen1" path="res://assets/Objects/Basic_Grass_Biom_things.png" id="1_1w1ag"]
+[ext_resource type="Texture2D" uid="uid://cuxrxl5d6r7mr" path="res://assets/Objects/Simple Milk and grass item.png" id="2_airtu"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_airtu"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_airtu"]
+
+[node name="chest_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="Container" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 1.0
+offset_right = 173.0
+offset_bottom = 83.0
+
+[node name="BoxContainer" type="BoxContainer" parent="Container"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="Container/BoxContainer"]
+custom_minimum_size = Vector2(66.225, 17.915)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+select_mode = 1
+item_count = 2
+max_columns = 3
+item_0/text = "tomato"
+item_0/icon = ExtResource("1_1w1ag")
+item_1/text = "milk"
+item_1/icon = ExtResource("2_airtu")
+
+[node name="Label" type="Label" parent="Container/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "chest"
+
+[node name="MenuButton" type="MenuButton" parent="Container/BoxContainer"]
+custom_minimum_size = Vector2(38.295, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_airtu")
+
+[node name="Button" type="Button" parent="Container/BoxContainer"]
+custom_minimum_size = Vector2(60.66, 40.74)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+action_mode = 0
+
+[node name="Button2" type="Button" parent="Container/BoxContainer"]
+layout_mode = 2
+icon = SubResource("ImageTexture_airtu")
+
+[node name="GridContainer" type="GridContainer" parent="Container"]
+layout_mode = 2
+columns = 6

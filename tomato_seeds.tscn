@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://crl5nudcm6hnj"]
+
+[ext_resource type="Texture2D" uid="uid://brms3xuj4w2jo" path="res://assets/Objects/Basic_Plants.png" id="1_b3fb1"]
+[ext_resource type="Script" uid="uid://cvgw7kdqslshe" path="res://Scripts/tomato_seeds.gd" id="1_og1gx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_og1gx"]
+size = Vector2(18, 20)
+
+[node name="tomato_seeds" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_og1gx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.51, 1.51)
+texture = ExtResource("1_b3fb1")
+region_enabled = true
+region_rect = Rect2(1.5689278, 17.410622, 13.129688, 14.028984)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_og1gx")

@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://bijmnos4ac7qj"]
+
+[ext_resource type="Script" uid="uid://chjujgeu11sif" path="res://Scripts/rigid_body_2d.gd" id="1_yj05v"]
+[ext_resource type="Texture2D" uid="uid://drrs665vi81an" path="res://assets/Characters/Free Cow Sprites.png" id="2_m1w7b"]
+[ext_resource type="Script" uid="uid://xnrv5tnix3wi" path="res://Scripts/cow_sprite.gd" id="3_m1w7b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5k1g"]
+atlas = ExtResource("2_m1w7b")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uaxjc"]
+atlas = ExtResource("2_m1w7b")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tc63g"]
+atlas = ExtResource("2_m1w7b")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhu8x"]
+atlas = ExtResource("2_m1w7b")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_363vg"]
+atlas = ExtResource("2_m1w7b")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jbpbs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5k1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uaxjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tc63g")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhu8x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_363vg")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="cow" type="RigidBody2D"]
+script = ExtResource("1_yj05v")
+speed = 5
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-3, -1, -3, 0, -7, 0, -9, 1, -10, 2, -10, 4, -11, 4, -12, 5, -10, 7, -10, 10, -9, 12, -8, 13, -6, 13, -5, 12, -3, 12, -2, 13, 0, 13, 1, 12, 2, 12, 3, 13, 5, 13, 6, 12, 11, 8, 12, 7, 13, 3, 14, 2, 14, -1, 13, -2, 11, -2, 11, -1, 9, -1, 9, -3, 8, -4, 6, -4, 6, -2, 4, -2, 4, -4, 2, -4, 1, -3, 1, -1, 0, -2, -2, -2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jbpbs")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.68892205
+script = ExtResource("3_m1w7b")
+
+[node name="collision_area" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="collision_area"]
+polygon = PackedVector2Array(-5, -1, -10, 1, -11, 3, -12, 3, -12, 4, -13, 4, -13, 5, -14, 5, -14, 9, -11, 9, -11, 13, -9, 13, -9, 14, 6, 14, 6, 9, 12, 9, 12, 8, 13, 7, 13, 4, 14, 3, 15, 2, 15, -1, 13, -3, 10, -3, 8, -5, 2, -5, -1, -3, -1, -3, -3, -2)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="collision_area" to="." method="_on_collision_area_body_entered"]
+[connection signal="body_exited" from="collision_area" to="." method="_on_collision_area_body_exited"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbfqvrqkk2ynj"]
+
+[ext_resource type="Texture2D" uid="uid://bdtjeawbjyaux" path="res://assets/Tilesets/Tilled Dirt.png" id="1_t0hqf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_as8re"]
+
+[node name="dirt_block" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.475, 2.475)
+texture = ExtResource("1_t0hqf")
+region_enabled = true
+region_rect = Rect2(2.6151428, 98.291916, 11.026535, 11.450638)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_as8re")

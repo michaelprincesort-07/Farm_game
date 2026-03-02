@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://sj3pibv8oby"]
+
+[ext_resource type="Texture2D" uid="uid://dfsghucicyiwl" path="res://assets/Objects/Basic Plants.png" id="1_ajaoc"]
+[ext_resource type="Script" uid="uid://bh7877awq6qev" path="res://Scripts/tomato.gd" id="2_joa5w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bka0x"]
+radius = 7.071068
+
+[node name="tomato" type="Sprite2D"]
+scale = Vector2(0.58, 0.58)
+texture = ExtResource("1_ajaoc")
+region_enabled = true
+region_rect = Rect2(80.89304, 16.060528, 14.219887, 15.273205)
+script = ExtResource("2_joa5w")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_bka0x")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

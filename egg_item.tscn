@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbkfomxlewsy6"]
+
+[ext_resource type="Texture2D" uid="uid://swtcvc7s6dj4" path="res://assets/Objects/Egg item.png" id="1_p4mwp"]
+[ext_resource type="Script" uid="uid://bdpfsb5mqynkc" path="res://Scripts/egg_item.gd" id="1_pfyer"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pfyer"]
+radius = 7.0
+height = 16.0
+
+[node name="egg" type="Area2D"]
+script = ExtResource("1_pfyer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_p4mwp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_pfyer")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
