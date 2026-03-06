@@ -1,0 +1,6 @@
+res://ui_start_game.tscn
+res://Scripts/ui_start_game.gd
+res://game.tscn
+res://Scripts/game.gd
+res://Scripts/game_manager.gd
+res://Scripts/npc.gd

@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	if player.velocity != Vector2(0,0):
 		play_movement_animation()
 		
-	elif on_click and get_parent().item_in_hand == "axe":
+	elif on_click and get_parent().item_in_hand == "axe" and not get_parent().mouse_pressed:
 		get_parent().animation_is_playing = true
 		match character_dir:
 			"front":
@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 			"right":
 				self.play("chop_right")
 		
-	elif on_click and get_parent().item_in_hand == "hoe":
+	elif on_click and get_parent().item_in_hand == "hoe" and not get_parent().mouse_pressed:
 		get_parent().animation_is_playing = true
 		match character_dir:
 			"front":

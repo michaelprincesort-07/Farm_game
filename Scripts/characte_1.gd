@@ -5,6 +5,7 @@ signal play_dig
 
 const SPEED = 40.0
 const JUMP_VELOCITY = -400.0
+var mouse_pressed = false
 
 var has_picked_up = false
 var item_in_hand = "none"
@@ -35,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	if item_in_hand == "none" or item_in_hand == "tomato_seeds" or item_in_hand == "wheat_seeds":
 		animation_is_playing = false
 	
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and item_in_hand == "none" or animation_is_playing:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and item_in_hand == "none" or animation_is_playing or mouse_pressed:
 		velocity = Vector2(0,0)
 		pass
 	else:

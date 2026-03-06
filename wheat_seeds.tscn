@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba3fni0hiqw5n"]
+[gd_scene format=3 uid="uid://ba3fni0hiqw5n"]
 
 [ext_resource type="Script" uid="uid://cuumubfpj7so6" path="res://Scripts/wheat_seeds.gd" id="1_g7ir3"]
 [ext_resource type="Texture2D" uid="uid://dfsghucicyiwl" path="res://assets/Objects/Basic Plants.png" id="1_vtpkj"]
@@ -6,17 +6,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7ir3"]
 size = Vector2(23, 25)
 
-[node name="wheat_seeds" type="Area2D"]
+[node name="wheat_seeds" type="Area2D" unique_id=418277951]
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_g7ir3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(5.5, -6.500001)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1750411339]
+position = Vector2(-9.536743e-07, 0)
 scale = Vector2(1.9166666, 1.9285715)
 texture = ExtResource("1_vtpkj")
 region_enabled = true
 region_rect = Rect2(1.6465797, 1.4368525, 12.632353, 14.294798)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5.5, -6.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=443731131]
+position = Vector2(4.7683716e-07, -4.7683716e-07)
 shape = SubResource("RectangleShape2D_g7ir3")

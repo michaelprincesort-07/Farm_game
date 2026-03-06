@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://bthlki1538mka"]
+
+[ext_resource type="Texture2D" uid="uid://baiunsmp2kds0" path="res://assets/Idle.png" id="1_ideak"]
+[ext_resource type="Script" uid="uid://btkbkx58v7ete" path="res://Scripts/npc.gd" id="1_xxcha"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxcha"]
+atlas = ExtResource("1_ideak")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh24r"]
+atlas = ExtResource("1_ideak")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul7y6"]
+atlas = ExtResource("1_ideak")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bc6q4"]
+atlas = ExtResource("1_ideak")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcvl2"]
+atlas = ExtResource("1_ideak")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d61ma"]
+atlas = ExtResource("1_ideak")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slxoh"]
+atlas = ExtResource("1_ideak")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l64hl"]
+atlas = ExtResource("1_ideak")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_215dd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxcha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh24r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul7y6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bc6q4")
+}],
+"loop": true,
+"name": &"idle_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcvl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d61ma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slxoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l64hl")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}]
+
+[node name="Npc" type="RigidBody2D" unique_id=744883076]
+script = ExtResource("1_xxcha")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1849190916]
+polygon = PackedVector2Array(-5, -2, -4, -1, -3, 0, -3, 1, -5, 3, -5, 5, -4, 6, -4, 9, -3, 10, 0, 10, 4, 9, 5, 8, 5, 3, 5, 1, 6, -1, 7, -2, 7, -8, 5, -10, -1, -10, -5, -6)
+
+[node name="Npc_animation" type="AnimatedSprite2D" parent="." unique_id=9602634]
+modulate = Color(1, 1, 1, 0.7529412)
+sprite_frames = SubResource("SpriteFrames_215dd")
+animation = &"idle_left"
+autoplay = "idle_left"
+
+[node name="interaction_layer" type="Area2D" parent="." unique_id=1948800880]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interaction_layer" unique_id=1683607885]
+polygon = PackedVector2Array(6, -14, 11, -8, 11, 10, 6, 14, -5, 14, -8, 11, -8, -10, -5, -14)
+
+[connection signal="body_entered" from="interaction_layer" to="." method="_on_interaction_layer_body_entered"]
+[connection signal="body_exited" from="interaction_layer" to="." method="_on_interaction_layer_body_exited"]

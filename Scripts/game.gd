@@ -1,5 +1,6 @@
 extends Node2D
 
+var start_game = false
 
 var distance_from_mouse = 0
 
@@ -20,9 +21,7 @@ var button14 = false
 var button15 = false
 var button16 = false
 
-
 var slots = {}
-
 
 var slot1 = null
 var slot2 = null
@@ -41,20 +40,15 @@ var slot14 = null
 var slot15 = null
 var slot16 = null
 
-
 var day_tracker = 0
 var physical_items = []
 var item_dict = {}
+var open_player_UI = false
+var item_is_dragged = false
 
 var active_hand = {
 	"slot_1":false,"slot_2":false,
-	"slot_3":false,"slot_4":false,
-	"slot_5":false,"slot_6":false,
-	"slot_7":false,"slot_8":false,
-	"slot_9":false,"slot_10":false,
-	"slot_11":false,"slot_12":false,
-	"slot_13":false,"slot_14":false,
-	"slot_15":false,"slot_16":false
+	"slot_3":false,"slot_4":false
 	}
 
 #var slots = {"slot_1":[false,slot1],"slot_2":[false,slot2],"slot_3":[false,slot3],"slot_4":[false,slot4]}
@@ -69,10 +63,10 @@ var wheat_object: PackedScene = preload("res://wheat.tscn")
 
 func _ready() -> void:
 
-	slot1 = $CanvasLayer/Sprite2D/GridContainer2/Button.position + Vector2(4,5)
-	slot2 = $CanvasLayer/Sprite2D/GridContainer2/Button2.position + Vector2(13,5)
-	slot3 = $CanvasLayer/Sprite2D/GridContainer2/Button3.position + Vector2(22,5)
-	slot4 = $CanvasLayer/Sprite2D/GridContainer2/Button4.position + Vector2(31,5)
+	slot1 = $CanvasLayer/Player_hot_bar/GridContainer2/Button.position + Vector2(4,5)
+	slot2 = $CanvasLayer/Player_hot_bar/GridContainer2/Button2.position + Vector2(13,5)
+	slot3 = $CanvasLayer/Player_hot_bar/GridContainer2/Button3.position + Vector2(22,5)
+	slot4 = $CanvasLayer/Player_hot_bar/GridContainer2/Button4.position + Vector2(31,5)
 	
 	slot5 = $CanvasLayer/Player_inven_UI/slot_5.position + Vector2(3.5,-42)
 	slot6 = $CanvasLayer/Player_inven_UI/slot_6.position + Vector2(13,-42)
@@ -119,7 +113,7 @@ func _ready() -> void:
 	
 	for item in item_dict:
 		if item_dict[item][0] != 0:
-			$CanvasLayer/Sprite2D/GridContainer2.add_child(item_dict[item][1])
+			$CanvasLayer/Player_hot_bar/GridContainer2.add_child(item_dict[item][1])
 			for slot in slots:
 				if not slots[slot][0]:
 					item_dict[item][1].position = slots[slot][1]
@@ -133,13 +127,33 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
+	if not self.visible:
+		$CanvasLayer/Player_hot_bar.visible = false
+	else:
+		$CanvasLayer/Player_hot_bar.visible = true
+		
+	
 	var why = delta
 	if why:
 		pass
 		
 	if Input.is_key_pressed(KEY_I):
-		pass
-		
+		open_player_UI = true
+	
+	if item_is_dragged:
+		$characte_1.mouse_pressed = true
+	else:
+		$characte_1.mouse_pressed = false
+	
+	if open_player_UI:
+		$CanvasLayer/Player_inven_UI.visible = true
+		$CanvasLayer/Player_inven_UI/button_background.visible = true
+		$CanvasLayer/inv_background.visible = true
+	else:
+		$CanvasLayer/Player_inven_UI.visible = false
+		$CanvasLayer/Player_inven_UI/button_background.visible = false
+		$CanvasLayer/inv_background.visible = false
+			
 	var tomato = tomato_object.instantiate()
 	var wheat = wheat_object.instantiate()
 	
@@ -171,14 +185,17 @@ func _process(delta: float) -> void:
 	
 	for item in physical_items:
 		
-		for i in range(5,16):
+		for i in range(5,17):
 			if item.slot == "slot_%d" %i:
-				pass#item.visible = false
+				if not $CanvasLayer/Player_inven_UI.visible:
+					item.visible = false
+				else:
+					item.visible = true
 		
 		for slot in slots:
 			if slots[slot][2] and item.slot == slot:
 				item.position = get_direction()
-		
+			
 		
 	for item in item_dict:
 		
@@ -186,7 +203,7 @@ func _process(delta: float) -> void:
 		
 		if item_dict[item][0] != 0:
 			if item_dict[item][1] not in physical_items:
-				$CanvasLayer/Sprite2D/GridContainer2.add_child(item_dict[item][1])
+				$CanvasLayer/Player_hot_bar/GridContainer2.add_child(item_dict[item][1])
 				for slot in slots:
 						if not slots[slot][0]:
 							item_dict[item][1].position = slots[slot][1]
@@ -199,7 +216,7 @@ func _process(delta: float) -> void:
 			else: pass
 		else:
 			if item_dict[item][1] in physical_items:
-				$CanvasLayer/Sprite2D/GridContainer2.remove_child(item_dict[item][1])
+				$CanvasLayer/Player_hot_bar/GridContainer2.remove_child(item_dict[item][1])
 				var index = 0
 				for items in physical_items:
 					if items == item_dict[item][1]:
@@ -227,25 +244,38 @@ func get_direction():
 
 func clamp_position(node):
 	
+	var hidden_inv = false
+	
 	for slot in slots:
 		if (slots[slot][1].x-5) < node.position.x and node.position.x < (slots[slot][1].x + 6):
 			if (slots[slot][1].y-5) < node.position.y and node.position.y < (slots[slot][1].y + 6):
-				slots[node.slot][0] = false
-				for item in physical_items:
-					if item.slot == slot:
-						item.slot = node.slot
-						item.position = slots[node.slot][1]
-						slots[slot][0] = true
-				node.position = slots[slot][1]
-				node.slot = slot
-				slots[slot][0] = true
-				return
+				for i in range(5,17):
+					if slot == "slot_%d" %i:
+						hidden_inv = true
+						break
 				
+				if hidden_inv and $CanvasLayer/Player_inven_UI.visible or not hidden_inv:
+					slots[node.slot][0] = false
+					for item in physical_items:
+						if item.slot == slot:
+							item.slot = node.slot
+							item.position = slots[node.slot][1]
+							slots[slot][0] = true
+					node.position = slots[slot][1]
+					node.slot = slot
+					slots[slot][0] = true
+					hidden_inv = false
+					return
+				hidden_inv = false
 	node.position = slots[node.slot][1]
 				
 
 
 func drag_and_clamp():
+	if item_is_dragged:
+		item_is_dragged = false
+	else:
+		item_is_dragged = true
 	for item in physical_items:
 		for slot in slots:
 			if slots[slot][2] and item.slot == slot:
@@ -255,11 +285,8 @@ func drag_and_clamp():
 
 
 func _on_button_button_down() -> void:
-	for item in physical_items:
-		if item.slot == "slot_1":
-			distance_from_mouse = (item.position - get_global_mouse_position())
 	slots["slot_1"][2] = true 
-	#drag_and_clamp()
+	drag_and_clamp()
 	
 func _on_button_button_up() -> void:
 	slots["slot_1"][2] = false 
@@ -433,3 +460,7 @@ func _on_button_4_toggled(toggled_on: bool) -> void:
 			active_hand[slot] = true
 		else:
 			active_hand[slot] = false
+
+
+func _on_close_ui_pressed() -> void:
+	open_player_UI = false

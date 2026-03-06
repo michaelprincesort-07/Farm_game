@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://c1haqwes6lxwv"]
+
+[ext_resource type="Texture2D" uid="uid://1vjetd5mgffb" path="res://assets/UI_sprites/Sprite sheets/Setting menu.png" id="1_m23ga"]
+[ext_resource type="Script" uid="uid://dkdg5lyuesnpu" path="res://Scripts/ui_start_game.gd" id="1_oe8j2"]
+[ext_resource type="Texture2D" uid="uid://bglsu0b2yf1q6" path="res://assets/Untitled_design-removebg-preview.png" id="2_fddmy"]
+[ext_resource type="Texture2D" uid="uid://svr7ki83xvnn" path="res://a81de49c-9798-424d-9d40-4c4e79a82178.jpg" id="2_nujlp"]
+[ext_resource type="Script" uid="uid://bdsyrx2h3uo3l" path="res://Scripts/play_button.gd" id="2_ybekp"]
+[ext_resource type="Texture2D" uid="uid://tmdr38pjsxhc" path="res://assets/UI_sprites/Sprite sheets/UI Big Play Button.png" id="2_ytkgp"]
+[ext_resource type="Texture2D" uid="uid://od7ctoy21h0x" path="res://assets/UI_sprites/Sprite sheets/empty_button.png" id="5_y0h35"]
+[ext_resource type="FontFile" uid="uid://bjw0bfpa3tfgi" path="res://assets/UI_sprites/fonts/pixel font-7.ttf" id="6_y0h35"]
+
+[node name="UI_start_game" type="CanvasLayer" unique_id=1143469221]
+script = ExtResource("1_oe8j2")
+
+[node name="background" type="Sprite2D" parent="." unique_id=1641635605]
+modulate = Color(1, 1, 1, 0.78431374)
+position = Vector2(574, 344)
+scale = Vector2(1.6358545, 1.2806324)
+texture = ExtResource("2_nujlp")
+region_enabled = true
+region_rect = Rect2(-3.867859, -3.3646545, 714.7803, 538.0409)
+
+[node name="spritelands_image" type="Sprite2D" parent="." unique_id=1503930161]
+self_modulate = Color(1, 1, 1, 0.9764706)
+position = Vector2(588, 159.00002)
+scale = Vector2(0.9165639, 1.0891442)
+texture = ExtResource("2_fddmy")
+
+[node name="Control" type="Control" parent="." unique_id=830585012]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 575.0
+offset_top = 320.50003
+offset_right = 615.0
+offset_bottom = 360.50003
+
+[node name="BoxContainer" type="BoxContainer" parent="Control" unique_id=1530485683]
+layout_mode = 0
+offset_left = -166.0
+offset_top = 199.49997
+offset_right = -158.0
+offset_bottom = 209.06998
+scale = Vector2(21.365, 5.48)
+theme_override_constants/separation = 4
+
+[node name="Play_button" type="Button" parent="Control/BoxContainer" unique_id=875257315]
+layout_mode = 2
+script = ExtResource("2_ybekp")
+
+[node name="Sprite_background" type="Sprite2D" parent="Control/BoxContainer/Play_button" unique_id=397538596]
+visible = false
+position = Vector2(4.0720806, 8.9416065)
+rotation = 3.1415927
+scale = Vector2(0.10789001, -0.27623945)
+texture = ExtResource("1_m23ga")
+region_enabled = true
+region_rect = Rect2(135.46365, 9.254385, 111.49524, 126.42347)
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/BoxContainer/Play_button" unique_id=1201074152]
+position = Vector2(4.020774, 4.180274)
+scale = Vector2(0.099, 0.367)
+texture = ExtResource("2_ytkgp")
+region_enabled = true
+region_rect = Rect2(0, 31.172276, 95.39959, 32.827724)
+
+[node name="BoxContainer2" type="BoxContainer" parent="Control" unique_id=682315272]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 183.5
+offset_right = 124.0
+offset_bottom = 223.5
+scale = Vector2(2.412, 2.019)
+
+[node name="TextureButton" type="TextureButton" parent="Control/BoxContainer2" unique_id=1158554601]
+layout_mode = 2
+texture_normal = ExtResource("5_y0h35")
+
+[node name="Label" type="Label" parent="Control" unique_id=203510809]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 200.49997
+offset_right = 133.125
+offset_bottom = 222.69498
+scale = Vector2(2.5599902, 1.7690928)
+theme_override_colors/font_color = Color(0.7265616, 0.5188531, 0.34236664, 1)
+theme_override_fonts/font = ExtResource("6_y0h35")
+theme_override_font_sizes/font_size = 23
+text = "Exit"
+
+[connection signal="button_down" from="Control/BoxContainer/Play_button" to="." method="_on_play_button_button_down"]
+[connection signal="pressed" from="Control/BoxContainer2/TextureButton" to="." method="_on_texture_button_pressed"]

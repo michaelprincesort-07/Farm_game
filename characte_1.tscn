@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://b73hfhtfqxs2h"]
+[gd_scene format=3 uid="uid://b73hfhtfqxs2h"]
 
 [ext_resource type="Script" uid="uid://cenrobsgo4qmw" path="res://Scripts/characte_1.gd" id="1_olilj"]
 [ext_resource type="Texture2D" uid="uid://bw4ul61fkdkwk" path="res://assets/Characters/Basic Charakter Spritesheet.png" id="1_pgofj"]
@@ -406,12 +406,12 @@ size = Vector2(8, 9)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14a02"]
 size = Vector2(3.5, 3.5)
 
-[node name="characte_1" type="CharacterBody2D"]
+[node name="characte_1" type="CharacterBody2D" unique_id=421307904]
 collision_layer = 11
 collision_mask = 9
 script = ExtResource("1_olilj")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=979992531 node_paths=PackedStringArray("player")]
 position = Vector2(-1, -1)
 sprite_frames = SubResource("SpriteFrames_pitl0")
 animation = &"dig_right"
@@ -422,17 +422,18 @@ script = ExtResource("3_kbc02")
 player = NodePath("..")
 delay = 30
 
-[node name="front_colision" type="CollisionShape2D" parent="."]
+[node name="front_colision" type="CollisionShape2D" parent="." unique_id=720601557]
 position = Vector2(-1, 2.5)
 shape = SubResource("RectangleShape2D_rqc11")
 
-[node name="side_collision" type="CollisionShape2D" parent="."]
+[node name="side_collision" type="CollisionShape2D" parent="." unique_id=1149808768]
 position = Vector2(-1, 2)
 shape = SubResource("RectangleShape2D_0cv8g")
 disabled = true
 
-[node name="interaction_layer_front" type="CollisionShape2D" parent="."]
+[node name="interaction_layer_front" type="CollisionShape2D" parent="." unique_id=673138228]
 position = Vector2(-1, 10)
+scale = Vector2(1.365, 1.365)
 shape = SubResource("RectangleShape2D_14a02")
 
 [connection signal="play_dig" from="." to="AnimatedSprite2D" method="_on_characte_1_play_dig"]
