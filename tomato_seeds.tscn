@@ -1,20 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://crl5nudcm6hnj"]
+[gd_scene format=3 uid="uid://crl5nudcm6hnj"]
 
 [ext_resource type="Texture2D" uid="uid://brms3xuj4w2jo" path="res://assets/Objects/Basic_Plants.png" id="1_b3fb1"]
 [ext_resource type="Script" uid="uid://cvgw7kdqslshe" path="res://Scripts/tomato_seeds.gd" id="1_og1gx"]
+[ext_resource type="Script" uid="uid://baukwocarbshx" path="res://Scripts/panel.gd" id="3_rkujl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_og1gx"]
 size = Vector2(18, 20)
 
-[node name="tomato_seeds" type="Area2D"]
-scale = Vector2(0.5, 0.5)
+[node name="tomato_seeds" type="Area2D" unique_id=721010169]
+scale = Vector2(0.4, 0.4)
 script = ExtResource("1_og1gx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.51, 1.51)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1254876581]
+scale = Vector2(1.515, 1.515)
 texture = ExtResource("1_b3fb1")
 region_enabled = true
 region_rect = Rect2(1.5689278, 17.410622, 13.129688, 14.028984)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2129672251]
+scale = Vector2(1.01, 1.01)
 shape = SubResource("RectangleShape2D_og1gx")
+
+[node name="Panel" type="Panel" parent="." unique_id=1850140116]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.43
+offset_top = 2.975
+offset_right = 36.982
+offset_bottom = 35.055
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.205, 0.205)
+script = ExtResource("3_rkujl")
+
+[node name="Label" type="Label" parent="Panel" unique_id=361784367]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.676
+offset_top = -3.994
+offset_right = -19.206303
+offset_bottom = -15.809002
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.594, 1.702)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "1"

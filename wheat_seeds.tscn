@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cuumubfpj7so6" path="res://Scripts/wheat_seeds.gd" id="1_g7ir3"]
 [ext_resource type="Texture2D" uid="uid://dfsghucicyiwl" path="res://assets/Objects/Basic Plants.png" id="1_vtpkj"]
+[ext_resource type="Script" uid="uid://baukwocarbshx" path="res://Scripts/panel.gd" id="3_404ra"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7ir3"]
 size = Vector2(23, 25)
@@ -12,11 +13,41 @@ script = ExtResource("1_g7ir3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1750411339]
 position = Vector2(-9.536743e-07, 0)
-scale = Vector2(1.9166666, 1.9285715)
+scale = Vector2(1.515, 1.524)
 texture = ExtResource("1_vtpkj")
 region_enabled = true
 region_rect = Rect2(1.6465797, 1.4368525, 12.632353, 14.294798)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=443731131]
-position = Vector2(4.7683716e-07, -4.7683716e-07)
+scale = Vector2(0.81, 0.81)
 shape = SubResource("RectangleShape2D_g7ir3")
+
+[node name="Panel" type="Panel" parent="." unique_id=1807141448]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.43
+offset_top = 2.975
+offset_right = 36.982
+offset_bottom = 35.055
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.205, 0.205)
+script = ExtResource("3_404ra")
+
+[node name="Label" type="Label" parent="Panel" unique_id=1414921526]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.676
+offset_top = -3.994
+offset_right = -19.206303
+offset_bottom = -15.809002
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.594, 1.702)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "1"

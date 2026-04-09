@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://1o3qdo5fxsth"]
+[gd_scene format=3 uid="uid://1o3qdo5fxsth"]
 
 [ext_resource type="Texture2D" uid="uid://byntf560mirkc" path="res://assets/Objects/Basic tools and meterials.png" id="1_sykeo"]
 [ext_resource type="Script" uid="uid://4rpeceb75o2w" path="res://Scripts/axe.gd" id="2_7dw2v"]
 
-[node name="axe" type="Sprite2D"]
-scale = Vector2(0.49, 0.49)
+[node name="axe" type="Sprite2D" unique_id=76303997]
+scale = Vector2(0.425, 0.425)
 texture = ExtResource("1_sykeo")
 region_enabled = true
 region_rect = Rect2(16.599945, -0.21383286, 15.669296, 16.757439)

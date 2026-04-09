@@ -2,7 +2,6 @@ extends Sprite2D
 
 var slot = "none"
 
+var amount_is_visible:bool = true
 
-
-func _ready() -> void:
-	pass # Replace with function body.
+var amount:int = 0

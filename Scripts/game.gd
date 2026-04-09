@@ -45,6 +45,7 @@ var physical_items = []
 var item_dict = {}
 var open_player_UI = false
 var item_is_dragged = false
+var coins = 0
 
 var active_hand = {
 	"slot_1":false,"slot_2":false,
@@ -103,12 +104,14 @@ func _ready() -> void:
 	var wheat = wheat_object.instantiate()
 	
 	item_dict = {
-		"tomato":[0,tomato],
+		"tomato":[1,tomato],
 		"hoe":[1,hoe],
 		"axe":[1,axe],
 		"tomato_seeds":[3,tomato_seeds],
 		"wheat_seeds":[3,wheat_seeds],
-		"wheat":[0,wheat]
+		"wheat":[1,wheat],
+		"milk":[0,null],
+		"egg":[0,null]
 	}
 	
 	for item in item_dict:
@@ -118,6 +121,7 @@ func _ready() -> void:
 				if not slots[slot][0]:
 					item_dict[item][1].position = slots[slot][1]
 					item_dict[item][1].slot = slot
+					item_dict[item][1].amount = item_dict[item][0]
 					slots[slot][0] = true
 					physical_items.append(item_dict[item][1])
 					break
@@ -127,10 +131,18 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	if not self.visible:
-		$CanvasLayer/Player_hot_bar.visible = false
-	else:
-		$CanvasLayer/Player_hot_bar.visible = true
+	for item in $characte_1.items:
+		if $characte_1.items[item] < item_dict[item][0]:
+			$characte_1.items[item] = item_dict[item][0]
+		
+	if $Npc.clicked_buy:
+		$CanvasLayer/Shop_background.visible = true
+		$CanvasLayer/Shop.visible = true
+		$Npc.clicked_buy = false
+		
+	if not $Npc.can_interact and not $Npc.clicked_buy:
+		$CanvasLayer/Shop_background.visible = false
+		$CanvasLayer/Shop.visible = false
 		
 	
 	var why = delta
@@ -195,11 +207,13 @@ func _process(delta: float) -> void:
 		for slot in slots:
 			if slots[slot][2] and item.slot == slot:
 				item.position = get_direction()
-			
+		
+		item.amount = item_dict[item.name][0]
 		
 	for item in item_dict:
 		
-		item_dict[item][0] += $characte_1.items[item]
+		#if $characte_1.items[item] > item_dict[item][0]:
+			#item_dict[item][0] = $characte_1.items[item]
 		
 		if item_dict[item][0] != 0:
 			if item_dict[item][1] not in physical_items:
@@ -208,6 +222,7 @@ func _process(delta: float) -> void:
 						if not slots[slot][0]:
 							item_dict[item][1].position = slots[slot][1]
 							item_dict[item][1].slot = slot
+							item_dict[item][1].amount = item_dict[item][0]
 							slots[slot][0] = true
 							physical_items.append(item_dict[item][1])
 							break
@@ -280,7 +295,9 @@ func drag_and_clamp():
 		for slot in slots:
 			if slots[slot][2] and item.slot == slot:
 				distance_from_mouse = (item.position - get_global_mouse_position())
+				item.amount_is_visible = false
 			elif not slots[slot][2] and item.slot == slot:
+				item.amount_is_visible = true
 				clamp_position(item)
 
 

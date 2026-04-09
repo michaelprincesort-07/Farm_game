@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://baiunsmp2kds0" path="res://assets/Idle.png" id="1_ideak"]
 [ext_resource type="Script" uid="uid://btkbkx58v7ete" path="res://Scripts/npc.gd" id="1_xxcha"]
+[ext_resource type="Texture2D" uid="uid://od7ctoy21h0x" path="res://assets/UI_sprites/Sprite sheets/empty_button.png" id="3_ul7y6"]
+[ext_resource type="FontFile" uid="uid://bjw0bfpa3tfgi" path="res://assets/UI_sprites/fonts/pixel font-7.ttf" id="4_ul7y6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxcha"]
 atlas = ExtResource("1_ideak")
@@ -89,5 +91,55 @@ autoplay = "idle_left"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interaction_layer" unique_id=1683607885]
 polygon = PackedVector2Array(6, -14, 11, -8, 11, 10, 6, 14, -5, 14, -8, 11, -8, -10, -5, -14)
 
+[node name="Shop_menue" type="Panel" parent="." unique_id=1838937815]
+z_index = 1
+offset_left = 5.0
+offset_top = -26.0
+offset_right = 48.795
+offset_bottom = 6.630001
+scale = Vector2(0.63, 0.63)
+
+[node name="Buy_button2" type="TextureButton" parent="Shop_menue" unique_id=144315979]
+layout_mode = 0
+offset_left = 3.1746035
+offset_top = 15.873016
+offset_right = 101.17461
+offset_bottom = 51.873016
+scale = Vector2(0.385, 0.385)
+texture_normal = ExtResource("3_ul7y6")
+
+[node name="Label" type="Label" parent="Shop_menue/Buy_button2" unique_id=726691574]
+layout_mode = 0
+offset_left = 33.333332
+offset_top = 9.090908
+offset_right = 61.966114
+offset_bottom = 25.090908
+scale = Vector2(1.27, 1.27)
+theme_override_colors/font_color = Color(0.654902, 0.48235294, 0.35686275, 1)
+theme_override_fonts/font = ExtResource("4_ul7y6")
+text = "Buy"
+
+[node name="Sell_button" type="TextureButton" parent="Shop_menue" unique_id=610269901]
+layout_mode = 0
+offset_left = 3.1746035
+offset_top = 1.5873008
+offset_right = 101.17461
+offset_bottom = 37.5873
+scale = Vector2(0.385, 0.385)
+texture_normal = ExtResource("3_ul7y6")
+
+[node name="Label" type="Label" parent="Shop_menue/Sell_button" unique_id=764664251]
+layout_mode = 0
+offset_left = 32.835823
+offset_top = 8.955225
+offset_right = 68.83582
+offset_bottom = 24.955225
+scale = Vector2(1.25, 1.25)
+theme_override_colors/font_color = Color(0.654902, 0.48235294, 0.35686275, 1)
+theme_override_fonts/font = ExtResource("4_ul7y6")
+text = "Sell"
+
 [connection signal="body_entered" from="interaction_layer" to="." method="_on_interaction_layer_body_entered"]
 [connection signal="body_exited" from="interaction_layer" to="." method="_on_interaction_layer_body_exited"]
+[connection signal="pressed" from="Shop_menue/Buy_button2" to="." method="_on_buy_button_2_pressed"]
+[connection signal="pressed" from="Shop_menue/Sell_button" to="." method="_on_sell_button_pressed"]

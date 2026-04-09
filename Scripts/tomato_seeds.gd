@@ -1,6 +1,11 @@
 extends Area2D
 
+var amount:int = 0
+
 var slot = "none"
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+
+var amount_is_visible:bool = true
+
+func _process(delta: float) -> void:
+	
+	$Panel/Label.text = str(amount)

@@ -1,23 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwt8rs461fxmg"]
+[gd_scene format=3 uid="uid://dwt8rs461fxmg"]
 
 [ext_resource type="Texture2D" uid="uid://dfsghucicyiwl" path="res://assets/Objects/Basic Plants.png" id="1_n1xnp"]
 [ext_resource type="Script" uid="uid://2efgwxchr2tr" path="res://Scripts/wheat.gd" id="2_40b45"]
+[ext_resource type="Script" uid="uid://baukwocarbshx" path="res://Scripts/panel.gd" id="3_pk37k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40b45"]
 size = Vector2(7.0479817, 18.730465)
 
-[node name="wheat" type="Sprite2D"]
+[node name="wheat" type="Sprite2D" unique_id=2053066591]
 scale = Vector2(0.56, 0.56)
 texture = ExtResource("1_n1xnp")
 region_enabled = true
 region_rect = Rect2(80.12674, 0, 15.8732605, 16.394806)
 script = ExtResource("2_40b45")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=674795384]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1409640385]
 position = Vector2(-0.38279077, 0.37095004)
 rotation = -2.3404865
 shape = SubResource("RectangleShape2D_40b45")
+
+[node name="Panel" type="Panel" parent="." unique_id=1804820273]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.079
+offset_top = -4.729
+offset_right = 29.472996
+offset_bottom = 27.216019
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.14, 0.14)
+script = ExtResource("3_pk37k")
+
+[node name="Label" type="Label" parent="Panel" unique_id=1141612491]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.676
+offset_top = -3.994
+offset_right = -19.206303
+offset_bottom = -15.809002
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.594, 1.702)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "1"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
